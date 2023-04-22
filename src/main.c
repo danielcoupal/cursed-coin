@@ -125,7 +125,7 @@ static bool is_rim_side(coin_t * p_coin, double x, double y, double z)
     bool b_ascend = 
         ((M_PI * 0.0 < p_coin->z_rad) && (p_coin->z_rad < M_PI * 0.5)) ||
         ((M_PI * 1.0 < p_coin->z_rad) && (p_coin->z_rad < M_PI * 1.5));
-    b_ascend ? (x += thick_vis / 2) : (x -= thick_vis / 2);
+    x += b_ascend ? (thick_vis / 2) : -(thick_vis / 2);
 
     double radius = sqrt((pow(x, 2) / fabs(cos(p_coin->z_rad))) + pow(z, 2));
     bool b_incl = radius < p_coin->r_out;

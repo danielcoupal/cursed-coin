@@ -18,13 +18,13 @@ vpath %.c src
 libtermbox2.a:
 	$(MAKE) -Ctermbox2 lib
 
-$(ODIR)/%.o: %.c $(DEPS) libtermbox2.a
+$(ODIR)/%.o: src/%.c $(DEPS)
 	mkdir -p build/obj
 	$(CC) -c -o $@ $< $(CFLAGS)
 
 cursed-coin: $(OBJ)
 	mkdir -p build
-	$(CC) -o build/$@ $^ $(CFLAGS) $(LIBS)
+	$(CC) -o build/$@ $^ $(CFLAGS) -L$(LDIR) $(LIBS)
 
 .PHONY: clean
 
