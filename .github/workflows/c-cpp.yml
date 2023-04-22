@@ -17,7 +17,5 @@ jobs:
       run: git submodule update --init
     - name: make-termbox
       run: make -C termbox2 lib
-    - name: install-termbox
-      run: make -C termbox2 install_lib
     - name: cursed-coin
       run: make cursed-coin
