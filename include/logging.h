@@ -1,11 +1,9 @@
 /***************************************************************************************************
  *
  * File        : logging.h
- * Project     : {project}
- * Copyright   : {copyright}
+ * Project     : cursed-coin
+ * Copyright   : Copyleft
  * Created on  : 2023-02-17
- * Compiler    : GCC 11.0+
- * Target      : {target}
  * Notes       : None
  *
  **************************************************************************************************/
@@ -17,7 +15,6 @@
  *      Easily-configurable logging functions
  *
  * @author Daniel Coupal
- *
  */
 
 /**
@@ -93,11 +90,21 @@
 #define LOG_PRINTF(fmt, ...)        \
     do                              \
     {                               \
-        printf(fmt, ##__VA_ARGS__); \
-        printf("\n");               \
+        FILE * f = fopen("log.txt", "a");     \
+        fprintf(f, fmt, ##__VA_ARGS__); \
+        fprintf(f, "\n");               \
+        fflush(f);\
+        fclose(f);\
     } while (0)
 
-#define LOG_PUTCHAR(c) (putchar_raw(c))
+#define LOG_PUTCHAR(c)              \
+    do                              \
+    {                               \
+        FILE * f = fopen("log.txt", "a");     \
+        fputc(c, f);\
+        fflush(f);\
+        fclose(f);\
+    } while (0)
 
 #if (1 <= LOG_VERBOSITY_THIS)
 #   define LOG_PRINTF_V(fmt, ...) LOG_PRINTF(fmt, ##__VA_ARGS__)
